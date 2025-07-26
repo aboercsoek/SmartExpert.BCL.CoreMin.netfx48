@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartExpert</RootNamespace>
+    <AssemblyName>SmartExpert.BCL.CoreMin</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\smartexpert.snk</AssemblyOriginatorKeyFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.8</TargetFrameworkVersion>
+  	<TargetFrameworkFolderName Condition=" '$(TargetFrameworkFolderName)' == '' ">net48</TargetFrameworkFolderName>
+    <TargetFrameworkName Condition=" '$(TargetFrameworkName)' == '' ">.NET Framework 4.8</TargetFrameworkName>
+
+    <DefineConstants>NET4_8;WCF_SUPPORTED;$(DefineConstants)</DefineConstants>
+
+    <BaseOutputDirectory Condition=" '$(BaseOutputDirectory)' == '' ">$([MSBuild]::Escape($([System.IO.Path]::GetFullPath(`$([System.IO.Path]::Combine(`$(MSBuildProjectDirectory)`, `..\build\`))`))))</BaseOutputDirectory>
+    <OutputPath>$(BaseOutputDirectory)bin\$(Configuration)\$(TargetFrameworkFolderName)</OutputPath>
+    <IntermediateOutputPath>$(BaseOutputDirectory)obj\b\$(Configuration)\$(TargetFrameworkFolderName)</IntermediateOutputPath>
+
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\ProjectAssemblyInfo.cs" />
+    <Compile Include="CUI\ActionBasedMenuItemCmd.cs" />
+    <Compile Include="CUI\AppMenuController.cs" />
+    <Compile Include="CUI\CommandLine.cs" />
+    <Compile Include="CUI\ConsoleAppMenuView.cs" />
+    <Compile Include="CUI\ConsoleHelper.cs" />
+    <Compile Include="CUI\IAppMenuView.cs" />
+    <Compile Include="CUI\MenuItemCommandBase.cs" />
+    <Compile Include="CUI\Paragraph.cs" />
+    <Compile Include="Collections\DebugViews\PropertyBagDebugView.cs" />
+    <Compile Include="Collections\Generic\DebugViews\CollectionDebugView.cs" />
+    <Compile Include="Collections\Generic\DebugViews\DictionaryDebugView.cs" />
+    <Compile Include="Collections\Generic\DebugViews\HashSetDebugView.cs" />
+    <Compile Include="Collections\Generic\HashSet.cs" />
+    <Compile Include="Collections\Generic\OrderedDictionary.cs" />
+    <Compile Include="Collections\Generic\ReadOnlyCollection.cs" />
+    <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
+    <Compile Include="Collections\Generic\TrackedList.cs" />
+    <Compile Include="Collections\Generic\TrackedListEnumerator.cs" />
+    <Compile Include="Collections\Generic\Tree.cs" />
+    <Compile Include="Collections\Generic\TreeNode.cs" />
+    <Compile Include="Collections\Generic\TreeWalker.cs" />
+    <Compile Include="Collections\Graphs\DirectedGraph.cs" />
+    <Compile Include="Collections\Graphs\Edge.cs" />
+    <Compile Include="Collections\Graphs\IEdge.cs" />
+    <Compile Include="Collections\IPropertyBag.cs" />
+    <Compile Include="Collections\PropertyBag.cs" />
+    <Compile Include="Core\AppUtils\AppHelper.cs" />
+    <Compile Include="Core\AppUtils\GlobalLock.cs" />
+    <Compile Include="Core\BoolExtensions.cs" />
+    <Compile Include="Core\BooleanBoxes.cs" />
+    <Compile Include="Core\GarbageCollectorEx.cs" />
+    <Compile Include="Core\NumberFormatter.cs" />
+    <Compile Include="Core\ObjectEx.cs" />
+    <Compile Include="DataTypes\Algorithms\Crc32Helper.cs" />
+    <Compile Include="DataTypes\Algorithms\PrimeFinder.cs" />
+    <Compile Include="DataTypes\Algorithms\NameGenerator.cs" />
+    <Compile Include="DataTypes\Algorithms\SequenceNumberGenerator.cs" />
+    <Compile Include="DataTypes\Attributes\DisplayNameAttribute.cs" />
+    <Compile Include="DataTypes\Calculation\UnitConverter.cs" />
+    <Compile Include="DataTypes\Calculation\MathUtil.cs" />
+    <Compile Include="DataTypes\Compare\FuncBasedComparer.cs" />
+    <Compile Include="DataTypes\Compare\FuncBasedEqualityComparer.cs" />
+    <Compile Include="DataTypes\Compare\StringEqualityComparer.cs" />
+    <Compile Include="DataTypes\Compare\ReferenceEqualityComparerT.cs" />
+    <Compile Include="DataTypes\Converters\Base64Converter.cs" />
+    <Compile Include="DataTypes\Converters\ByteArrayConverter.cs" />
+    <Compile Include="DataTypes\Converters\HexConverter.cs" />
+    <Compile Include="DataTypes\Converters\HexStringFormatOptions.cs" />
+    <Compile Include="DataTypes\DisposeMethodTrigger.cs" />
+    <Compile Include="DataTypes\DoubleUtil.cs" />
+    <Compile Include="DataTypes\FloatUtil.cs" />
+    <Compile Include="DataTypes\Enums\EnumExtensions.cs" />
+    <Compile Include="DataTypes\Enums\EnumHelper.cs" />
+    <Compile Include="DataTypes\IndexValuePair.cs" />
+    <Compile Include="DataTypes\Pair.cs" />
+    <Compile Include="DataTypes\PairEx.cs" />
+    <Compile Include="DataTypes\Singleton.cs" />
+    <Compile Include="DataTypes\TimestampedValue.cs" />
+    <Compile Include="DataTypes\Tuple.cs" />
+    <Compile Include="Data\Extensions\DataExtensions.cs" />
+    <Compile Include="Data\Utils\DbDataHelper.cs" />
+    <Compile Include="Diagnostics\ActionScopeTracer.cs" />
+    <Compile Include="Diagnostics\CallStack.cs" />
+    <Compile Include="Diagnostics\Console2File.cs" />
+    <Compile Include="Diagnostics\Console2String.cs" />
+    <Compile Include="Diagnostics\ConsoleTracer.cs" />
+    <Compile Include="Diagnostics\DebugTextWriter.cs" />
+    <Compile Include="Diagnostics\DebugTimer.cs" />
+    <Compile Include="Diagnostics\ITracer.cs" />
+    <Compile Include="Diagnostics\InternalMethodTracer.cs" />
+    <Compile Include="Diagnostics\MethodTracer.cs" />
+    <Compile Include="Diagnostics\OutputDebugStringTracer.cs" />
+    <Compile Include="Diagnostics\ScopeTracer.cs" />
+    <Compile Include="Drawing\ColorCMYK.cs" />
+    <Compile Include="Drawing\ColorEx.cs" />
+    <Compile Include="Drawing\ColorException.cs" />
+    <Compile Include="Drawing\ColorHSL.cs" />
+    <Compile Include="Drawing\ColorHSV.cs" />
+    <Compile Include="Drawing\ColorRGB.cs" />
+    <Compile Include="Drawing\ColorUtil.cs" />
+    <Compile Include="Drawing\KnownColors.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgDirectoryPathException.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgEmptyException.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgException.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgFilePathException.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgNullException.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgNullOrEmptyException.cs" />
+    <Compile Include="Error\ArgumentExceptions\ArgOutOfRangeException.cs" />
+    <Compile Include="Error\BaseException.cs" />
+    <Compile Include="Error\BusinessException.cs" />
+    <Compile Include="Error\BusinessExceptions\BrokenBusinessRuleException.cs" />
+    <Compile Include="Error\CombinedException.cs" />
+    <Compile Include="Error\DataTypeExceptions\CollectionReadOnlyException.cs" />
+    <Compile Include="Error\DataTypeExceptions\DateException.cs" />
+    <Compile Include="Error\IOExceptions\DirectoryPathTooLongException.cs" />
+    <Compile Include="Error\IOExceptions\FilePathTooLongException.cs" />
+    <Compile Include="Error\InfrastructureException.cs" />
+    <Compile Include="Error\InteropExceptions\Win32ExecutionException.cs" />
+    <Compile Include="Error\RuntimeExceptions\AccessToDisposedObjectException.cs" />
+    <Compile Include="Error\RuntimeExceptions\InvalidOperationRequestException.cs" />
+    <Compile Include="Error\RuntimeExceptions\InvalidTypeCastException.cs" />
+    <Compile Include="Error\RuntimeExceptions\ObjectInitializationFailedException.cs" />
+    <Compile Include="Error\RuntimeExceptions\OperationExecutionFailedException.cs" />
+    <Compile Include="Error\RuntimeExceptions\ProcessRunnerException.cs" />
+    <Compile Include="Error\SecurityExceptions\ActiveDirectoryException.cs" />
+    <Compile Include="Error\SecurityExceptions\InvalidCredentialException.cs" />
+    <Compile Include="Error\SecurityExceptions\PermissionException.cs" />
+    <Compile Include="Error\SecurityExceptions\PrivilegeNotHeldException.cs" />
+    <Compile Include="Error\SecurityExceptions\QueryCredentialDialogException.cs" />
+    <Compile Include="Error\TechException.cs" />
+    <Compile Include="Error\Utils\ExceptionHelper.cs" />
+    <Compile Include="Error\Utils\ExceptionText.cs" />
+    <Compile Include="Error\Utils\ExceptionXmlHelper.cs" />
+    <Compile Include="IO\CsvWriter.cs" />
+    <Compile Include="IO\DgmlGraphWriter.cs" />
+    <Compile Include="IO\DgmlStyleTargetType.cs" />
+    <Compile Include="IO\ExcelXmlWriter.cs" />
+    <Compile Include="IO\Extensions\DirectoryInfoExtensions.cs" />
+    <Compile Include="IO\Extensions\FileInfoExtensions.cs" />
+    <Compile Include="IO\Extensions\StreamExtensions.cs" />
+    <Compile Include="IO\Extensions\StreamReaderExtensions.cs" />
+    <Compile Include="IO\MultiFileWatcher.cs" />
+    <Compile Include="IO\SeekableReadOnlyStream.cs" />
+    <Compile Include="IO\UnclosableStream.cs" />
+    <Compile Include="IO\Utils\FileHelper.cs" />
+    <Compile Include="IO\Utils\PathHelper.cs" />
+    <Compile Include="IO\Utils\StreamReaderHelper.cs" />
+    <Compile Include="IO\Utils\StreamHelper.cs" />
+    <Compile Include="IO\VirtualStream.cs" />
+    <Compile Include="Interop\AdvApi32.cs" />
+    <Compile Include="Interop\ComputerNameFormat.cs" />
+    <Compile Include="Interop\CredUi.cs" />
+    <Compile Include="Interop\CredUiInfo.cs" />
+    <Compile Include="Interop\Kernel32.cs" />
+    <Compile Include="Interop\LUID.cs" />
+    <Compile Include="Interop\LUID_AND_ATTRIBUTES.cs" />
+    <Compile Include="Interop\LogonFlags.cs" />
+    <Compile Include="Interop\Netapi32.cs" />
+    <Compile Include="Interop\ProcessMemoryInformation.cs" />
+    <Compile Include="Interop\Psapi.cs" />
+    <Compile Include="Interop\SYSTEMTIME.cs" />
+    <Compile Include="Interop\SafeCloseHandle.cs" />
+    <Compile Include="Interop\SafeCryptProvHandle.cs" />
+    <Compile Include="Interop\SafeGlobalAllocHandle.cs" />
+    <Compile Include="Interop\SafeServiceHandle.cs" />
+    <Compile Include="Interop\SafeTokenPrivileges.cs" />
+    <Compile Include="Interop\SafeUserToken.cs" />
+    <Compile Include="Interop\SecurityImpersonationLevel.cs" />
+    <Compile Include="Interop\SecurityStatus.cs" />
+    <Compile Include="Interop\ServiceDescription.cs" />
+    <Compile Include="Interop\TOKEN_PRIVILEGE.cs" />
+    <Compile Include="Interop\TokenInformationClass.cs" />
+    <Compile Include="Interop\Win32.cs" />
+    <Compile Include="Interop\Win32Helper.cs" />
+    <Compile Include="Interop\WinSecurityContext.cs" />
+    <Compile Include="Interop\WindowsStatusCode.cs" />
+    <Compile Include="Linq\ArrayExtensions.cs" />
+    <Compile Include="Linq\CollectionHelper.cs" />
+    <Compile Include="Linq\DictionaryExtensions.cs" />
+    <Compile Include="Linq\EmptyArrayT.cs" />
+    <Compile Include="Linq\EmptyCollection.cs" />
+    <Compile Include="Linq\EmptyDictionary.cs" />
+    <Compile Include="Linq\EnumerableExtensions.cs" />
+    <Compile Include="Linq\IteratorHelper.cs" />
+    <Compile Include="Linq\QueueExtensions.cs" />
+    <Compile Include="Linq\StackExtensions.cs" />
+    <Compile Include="Logging\LogContext.cs" />
+    <Compile Include="Logging\LogFormatHelper.cs" />
+    <Compile Include="Logging\LogMethod.cs" />
+    <Compile Include="Logging\QuickLogger.cs" />
+    <Compile Include="Messaging\BoolMessage.cs" />
+    <Compile Include="Messaging\BoolMessageData.cs" />
+    <Compile Include="Messaging\BoolMessageExtensions.cs" />
+    <Compile Include="Messaging\BoolMessageItem.cs" />
+    <Compile Include="Messaging\ErrorData.cs" />
+    <Compile Include="Messaging\ErrorDataType.cs" />
+    <Compile Include="Messaging\EventHelper.cs" />
+    <Compile Include="Messaging\ExecuteHelper.cs" />
+    <Compile Include="Messaging\ExecuteHelper.BoolMessageData.cs">
+      <DependentUpon>ExecuteHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reflection\AssemblyEx.cs" />
+    <Compile Include="Reflection\AssemblyHelper.cs" />
+    <Compile Include="Reflection\AttributeEx.cs" />
+    <Compile Include="Reflection\DataContractTypeInfo.cs" />
+    <Compile Include="Reflection\ExtensionMethodsReflectionHelper.cs" />
+    <Compile Include="Reflection\GenericTypeReflectionHelper.cs" />
+    <Compile Include="Reflection\MemberInfoEx.cs" />
+    <Compile Include="Reflection\MethodInfoEx.cs" />
+    <Compile Include="Reflection\ReflectionEx.cs" />
+    <Compile Include="Reflection\ReflectionUtils.cs" />
+    <Compile Include="Reflection\TypeEx.cs" />
+    <Compile Include="Reflection\TypeHelper.cs" />
+    <Compile Include="Reflection\TypeOf.cs" />
+    <Compile Include="Reflection\PeReader\CharacteristicsType.cs" />
+    <Compile Include="Reflection\PeReader\CoffHeader.cs" />
+    <Compile Include="Reflection\PeReader\Cor20Header.cs" />
+    <Compile Include="Reflection\PeReader\DataDir.cs" />
+    <Compile Include="Reflection\PeReader\FileRegion.cs" />
+    <Compile Include="Reflection\PeReader\ImageFileMachine.cs" />
+    <Compile Include="Reflection\PeReader\ImageSectionType.cs" />
+    <Compile Include="Reflection\PeReader\ImageSubsystem.cs" />
+    <Compile Include="Reflection\PeReader\MdStreamHeader.cs" />
+    <Compile Include="Reflection\PeReader\MetaDataHeaders.cs" />
+    <Compile Include="Reflection\PeReader\MetaDataTableHeader.cs" />
+    <Compile Include="Reflection\PeReader\ModuleException.cs" />
+    <Compile Include="Reflection\PeReader\ModuleHeaders.cs" />
+    <Compile Include="Reflection\PeReader\MsDosStub.cs" />
+    <Compile Include="Reflection\PeReader\OsHeaders.cs" />
+    <Compile Include="Reflection\PeReader\PeHeader.cs" />
+    <Compile Include="Reflection\PeReader\SectionHeader.cs" />
+    <Compile Include="Reflection\PeReader\StorageSigAndHeader.cs" />
+    <Compile Include="Reflection\PeReader\PeFileInfo.cs" />
+    <Compile Include="RegularExpression\RegexExpressionStrings.cs" />
+    <Compile Include="RegularExpression\RegexHelper.cs" />
+    <Compile Include="Security\Authentication\ConsolePromptForCredential.cs" />
+    <Compile Include="Security\Authentication\CredentialEntry.cs" />
+    <Compile Include="Security\Authentication\CredentialManager.cs" />
+    <Compile Include="Security\Authentication\LogonProviderType.cs" />
+    <Compile Include="Security\Authentication\LogonType.cs" />
+    <Compile Include="Security\Authentication\QueryCredentialError.cs" />
+    <Compile Include="Security\Authentication\QueryCredentialOptions.cs" />
+    <Compile Include="Security\Authentication\QueryCredentialDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Security\Claims\ClaimsHelper.cs" />
+    <Compile Include="Security\Crypto\CryptographyHelper.cs" />
+    <Compile Include="Security\Crypto\HashAlgorithmType.cs" />
+    <Compile Include="Security\Crypto\KeyedHashAlgorithmType.cs" />
+    <Compile Include="Security\Identity\AccountType.cs" />
+    <Compile Include="Security\Identity\IdentityInfo.cs" />
+    <Compile Include="Security\Identity\IdentityResolver.cs" />
+    <Compile Include="Security\Identity\SidHelper.cs" />
+    <Compile Include="Security\LSA\LsaAccountManager.cs" />
+    <Compile Include="Security\Privileges\Privilege.cs" />
+    <Compile Include="Security\Privileges\PrivilegeAction.cs" />
+    <Compile Include="Security\Privileges\PrivilegeCollection.cs" />
+    <Compile Include="Security\Privileges\PrivilegeState.cs" />
+    <Compile Include="Security\SecurityHelper.cs" />
+    <Compile Include="Security\UniqueSecurityId.cs" />
+    <Compile Include="Serialization\BinaryFormatterWrapper.cs" />
+    <Compile Include="Serialization\DataContractSerializerWrapper.cs" />
+    <Compile Include="Serialization\DictionaryXmlSerializerHelper.cs" />
+    <Compile Include="Serialization\ISerializationFormatter.cs" />
+    <Compile Include="Serialization\NetDataContractSerializerWrapper.cs" />
+    <Compile Include="Serialization\SerializationFormatterFactory.cs" />
+    <Compile Include="Serialization\SerializationFormatters.cs" />
+    <Compile Include="Serialization\SerializationHelper.cs" />
+    <Compile Include="Serialization\XmlSerializerWrapper.cs" />
+    <Compile Include="SystemManagement\AppEventLog.cs" />
+    <Compile Include="SystemManagement\EnvironmentHelper.cs" />
+    <Compile Include="SystemManagement\RegistryHelper.cs" />
+    <Compile Include="SystemProcesses\LineReceivedEventArgs.cs" />
+    <Compile Include="SystemProcesses\ProcessHelper.cs" />
+    <Compile Include="SystemProcesses\ProcessMemoryInfo.cs" />
+    <Compile Include="SystemProcesses\ProcessRunner.cs" />
+    <Compile Include="SystemRuntime\AssemblyNameComparer.cs" />
+    <Compile Include="SystemRuntime\AssemblyNameWrapper.cs" />
+    <Compile Include="SystemRuntime\Gac.cs" />
+    <Compile Include="SystemRuntime\GacManager.cs" />
+    <Compile Include="SystemRuntime\Interop\AsmCacheLocationFlags.cs" />
+    <Compile Include="SystemRuntime\Interop\AsmNameObjCreateFlags.cs" />
+    <Compile Include="SystemRuntime\Interop\AsmNamePropertyFlags.cs" />
+    <Compile Include="SystemRuntime\Interop\AssemblyInfo.cs" />
+    <Compile Include="SystemRuntime\Interop\AssemblyInfoFlags.cs" />
+    <Compile Include="SystemRuntime\Interop\AssemblyNameDisplayFlags.cs" />
+    <Compile Include="SystemRuntime\Interop\IApplicationContext.cs" />
+    <Compile Include="SystemRuntime\Interop\IAssemblyCache.cs" />
+    <Compile Include="SystemRuntime\Interop\IAssemblyEnum.cs" />
+    <Compile Include="SystemRuntime\Interop\IAssemblyName.cs" />
+    <Compile Include="SystemServices\ServiceControlManagerEx.cs" />
+    <Compile Include="SystemServices\ServiceStartType.cs" />
+    <Compile Include="Text\Converters\StringConverter.cs" />
+    <Compile Include="Text\Converters\StringParser.cs" />
+    <Compile Include="Text\Extensions\StringBuilderEx.cs" />
+    <Compile Include="Text\Extensions\StringEx.cs" />
+    <Compile Include="Text\Utils\StringBuilderHelper.cs" />
+    <Compile Include="Text\Utils\StringHelper.cs" />
+    <Compile Include="Threading\ActiveTimeTrigger.cs" />
+    <Compile Include="Threading\AsyncHelper.cs" />
+    <Compile Include="Threading\AsyncHelper.Extensions.cs">
+      <DependentUpon>AsyncHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Threading\AutoReleaseReaderWriterLock.cs" />
+    <Compile Include="Threading\SpinWaitLock.cs" />
+    <Compile Include="Time\Utils\DateTimeHelper.cs" />
+    <Compile Include="Time\Utils\MonthType.cs" />
+    <Compile Include="Validation\ArgChecker.cs" />
+    <Compile Include="Validation\ResharperAnnotations.cs" />
+    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Web\WcfHelper.cs" />
+    <Compile Include="Web\WebHelper.cs" />
+    <Compile Include="WinForms\ApplicationHelper.cs" />
+    <Compile Include="WinForms\ClipboardUtil.cs" />
+    <Compile Include="WinForms\HtmlCLipboardData.cs" />
+    <Compile Include="Xml\Linq\XDocumentExtentions.cs" />
+    <Compile Include="Xml\Linq\XElementEqualyComparer.cs" />
+    <Compile Include="Xml\Linq\XElementExtentions.cs" />
+    <Compile Include="Xml\Linq\XAttributeExtentions.cs" />
+    <Compile Include="Xml\XPath\XPathHelper.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
+    <Compile Include="Xml\XmlNodeExtensions.cs" />
+    <Compile Include="Xml\XmlNodeListExtensions.cs" />
+    <Compile Include="Xml\Xsd\XsdHelper.cs" />
+    <Compile Include="StringResources.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StringResources.resx">
+      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SmartExpert.ico" />
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
+  <Target Name="BeforeBuild">
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <DefineConstants>DEBUG;TRACE;NET4_8;WCF_SUPPORTED;$(DefineConstants)</DefineConstants>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+      <DefineConstants>TRACE;NET4_8;WCF_SUPPORTED;$(DefineConstants)</DefineConstants>
+    </PropertyGroup>
+    <Message Text="DefineConstants: $(DefineConstants)" />
+    <ItemGroup Condition="Exists('$(BuildInfoFile)')">
+      <Compile Include="$(BuildInfoFile)" />
+    </ItemGroup>
+  </Target>
+  
+</Project>

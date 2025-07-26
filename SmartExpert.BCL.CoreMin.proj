@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<!--
+	============================================================
+								Task Imports
+
+	Import tasks into this project.
+	============================================================
+	-->
+	<Import Project="C:\Program Files\MSBuildExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+	<Import Project="$(MSBuildProjectDirectory)\SmartExpert.Build.tasks" />
+	
+	<!--
+	============================================================
+								Version Properties
+
+	Property group with build version properties.
+	============================================================
+	-->
+	<PropertyGroup>
+		<AssemblyName>SmartExpert.BCL.CoreMin</AssemblyName>
+		<MajorVersion>2</MajorVersion>
+		<MinorVersion>0</MinorVersion>
+		<VersionDate>$([System.DateTime]::Now.ToString("yy.MMdd"))</VersionDate>
+		<BuildTimeStamp>$([System.DateTime]::Now.ToString("yyMMddHHmmss"))</BuildTimeStamp>
+
+		<FileVersion Condition=" '$(FileVersion)' == '' " >$(MajorVersion).$(MinorVersion).$(VersionDate)</FileVersion>
+		<BuildVersion Condition=" '$(BuildVersion)' == '' " >$(MajorVersion).$(MinorVersion).0.0</BuildVersion>
+
+		<BuildProductName>$(AssemblyName) v$(MajorVersion).$(MinorVersion).$(VersionDate)</BuildProductName>
+	</PropertyGroup>
+
+	<!--
+	============================================================
+								Configuration Properties
+
+	Property group with build configuration properties.
+	============================================================
+	-->
+	<PropertyGroup>
+		<Configuration Condition="'$(Configuration)'==''">Debug</Configuration>
+		<ConfigurationSuffix Condition="'$(Configuration)' == 'Debug'">-debug</ConfigurationSuffix>
+		<ProjectTarget Condition="'$(ProjectTarget)'==''">Build</ProjectTarget>
+	</PropertyGroup>
+
+	<!--
+	============================================================
+							Project Folder/File Properties
+
+	Property group with project folder and file properties.
+	============================================================
+	-->
+	<PropertyGroup>
+		<!-- <OutputPath Condition="'$(OutputPath)' != '' and !HasTrailingSlash('$(OutputPath)')">$(OutputPath)\</OutputPath> -->
+		<SolutionDirectory>$(MSBuildProjectDirectory.TrimEnd('\'))\</SolutionDirectory>
+
+		<!-- <BaseOutputDirectory>$(MSBuildProjectDirectory)\..\build\</BaseOutputDirectory> -->
+		<BaseOutputDirectory>$([MSBuild]::Escape($([System.IO.Path]::GetFullPath(`$([System.IO.Path]::Combine(`$(MSBuildProjectDirectory)`, `..\build\`))`))))</BaseOutputDirectory>
+		<TestProjectBaseDirectory>$([MSBuild]::Escape($([System.IO.Path]::GetFullPath(`$([System.IO.Path]::Combine(`$(MSBuildProjectDirectory)`, `..\test`))`))))</TestProjectBaseDirectory>
+		<RefDirectory>$([MSBuild]::Escape($([System.IO.Path]::GetFullPath(`$([System.IO.Path]::Combine(`$(MSBuildProjectDirectory)`, `..\ref`))`))))</RefDirectory>
+		
+		<BinOutputDirectory>$(BaseOutputDirectory)bin</BinOutputDirectory>
+		<DocOutputDirectory>$(BaseOutputDirectory)doc</DocOutputDirectory>
+		<TestOutputDirectory>$(BaseOutputDirectory)test</TestOutputDirectory>
+		<ObjBinOutputDirectory>$(BaseOutputDirectory)obj\b</ObjBinOutputDirectory>
+		<ObjTestOutputDirectory>$(BaseOutputDirectory)obj\t</ObjTestOutputDirectory>
+
+		<RefLibDirectory>$(RefDirectory)\lib</RefLibDirectory>
+		<RefTestDirectory>$(RefDirectory)\test</RefTestDirectory>
+		<RefPackagesDirectory>$(RefDirectory)\packages</RefPackagesDirectory>
+		<RefToolsDirectory>$(RefDirectory)\tools</RefToolsDirectory>
+
+		<XUnitToolsDirectory>$(RefToolsDirectory)\xUnit191</XUnitToolsDirectory>
+
+		<ArchiveOutputPath>$(BinOutputDirectory)\$(Configuration)\Packages</ArchiveOutputPath>
+
+		<BuildInfoFile>$(BinOutputDirectory)\BuildInfo.cs</BuildInfoFile>
+	</PropertyGroup>
+
+	<!--
+    ============================================================
+								     Tools file pathes
+
+    Property group with project folder and file properties.
+    ============================================================
+    -->
+	<PropertyGroup>
+		<XUnit191>$(XUnitToolsDirectory)\xunit.console.exe</XUnit191>
+		<XUnit191Clr4>$(XUnitToolsDirectory)\xunit.console.clr4.exe</XUnit191Clr4>
+		<InfoZip>$(RefToolsDirectory)\zip.exe</InfoZip>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<BuildAllFrameworks>true</BuildAllFrameworks>
+		<BuildAllFrameworks Condition="'$(BuildNetFX40)' == 'true'">false</BuildAllFrameworks>
+		<BuildAllFrameworks Condition="'$(BuildNetFX48)' == 'true'">false</BuildAllFrameworks>
+
+		<IgnoreBuildFailures>false</IgnoreBuildFailures>
+		<IgnoreBuildFailures Condition=" '$(BuildAllFrameworks)'=='true' ">true</IgnoreBuildFailures>
+	</PropertyGroup>
+
+	<!-- at this point, if $(BuildAllFrameworks)=='true' it means that the user has not requested 
+    any specific framework, so we build all that are available -->
+	<PropertyGroup Condition="'$(BuildAllFrameworks)' == 'true'">
+		<DotNet4Version>v4.0.30319</DotNet4Version>
+
+		<BuildNetFX35>true</BuildNetFX35>
+		<BuildNetFX40>true</BuildNetFX40>
+		<BuildNetFX48>true</BuildNetFX48>
+
+		<!-- now disable those that we know cannot be built -->
+		<BuildNetFX40 Condition="!Exists('$(FrameworkDir)\$(DotNet4Version)') == ''">false</BuildNetFX40>
+		<BuildNetFX48 Condition="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full@Release) == ''">false</BuildNetFX48>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DocReferencesNetFX20>-ref "$(FrameworkDir)\v2.0.50727"</DocReferencesNetFX20>
+		<DocReferencesNetFX30>-ref "$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\v3.0"</DocReferencesNetFX30>
+		<DocReferencesNetFX35>-ref "$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\v3.5"</DocReferencesNetFX35>
+		<DocReferencesNetFX40>-ref "$(FrameworkDir)\$(DotNet4Version)"</DocReferencesNetFX40>
+		<DocReferencesNetFX48>-ref "$(FrameworkDir)\$(DotNet4Version)"</DocReferencesNetFX48>
+	</PropertyGroup>
+
+	<!--
+    ============================================================
+								All usported TargetFrameworks
+
+    A item list with all supported target frameworks.
+    ============================================================
+    -->
+	<ItemGroup>
+		<TargetFramework Include=".NET Framework 4.0" Condition="'$(BuildNetFX40)'=='true'">
+			<ProjectFileSuffix>.netfx40</ProjectFileSuffix>
+			<FolderName>net40</FolderName>
+			<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+			<ToolsVersion>4.0</ToolsVersion>
+			<DocReferences>$(DocReferencesNetFX40)</DocReferences>
+		</TargetFramework>
+		<TargetFramework Include=".NET Framework 4.8" Condition="'$(BuildNetFX48)'=='true'">
+			<ProjectFileSuffix>.netfx48</ProjectFileSuffix>
+			<FolderName>net48</FolderName>
+			<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+			<ToolsVersion>4.0</ToolsVersion>
+			<DocReferences>$(DocReferencesNetFX48)</DocReferences>
+		</TargetFramework>
+	</ItemGroup>
+
+	<!--
+    ============================================================
+									All
+
+    The full build entry point.
+    ============================================================
+    -->
+	<Target
+	 Name="All"
+	 DependsOnTargets="DeepClean;Clean;Build;BuildTests;RunTests" />
+
+	<!--
+    ============================================================
+									CheckinSuite
+
+    The check in suite entry point.
+    ============================================================
+    -->
+	<Target
+	 Name="CheckinSuite"
+	 DependsOnTargets="Clean;Build;BuildTests;RunTests" />
+
+	<!--
+    ============================================================
+									Rebuild
+
+    The rebuild (clean + build) entry point.
+    ============================================================
+    -->
+	<Target
+	 Name="Rebuild"
+	 DependsOnTargets="Clean;Build" />
+
+	<!--
+	============================================================
+								BuildAndTest
+
+	The build and run unittests entry point.
+	============================================================
+	-->
+	<Target
+	 Name="BuildAndTest"
+	 DependsOnTargets="Build;BuildTests;RunTests" />
+
+	<!--
+    ============================================================
+									Build
+
+    The main build entry point.
+    ============================================================
+    -->
+	<Target 
+	 Name="Build"  
+	 DependsOnTargets="InitBuild;CreateVersionInfo;CoreBuild" />
+
+	<!--
+    ============================================================
+									InitBuild
+
+    The init build entry point.
+    ============================================================
+    -->
+	<Target Name="InitBuild">
+		<Message Text="InitBuild Target" Importance="high" />
+		<Message Text="BaseOutputDirectory = $(BaseOutputDirectory)" />
+		<Message Text="TestProjectBaseDirectory = $(TestProjectBaseDirectory)" />
+		<Message Text="RefDirectory = $(RefDirectory)" />
+		<Message Text="BinOutputDirectory = $(BinOutputDirectory)" />
+		<!-- <Message Text="VisualStudioVersion = $(VisualStudioVersion)" /> -->
+		<MakeDir Directories="$(BinOutputDirectory)" Condition = "!Exists('$(BinOutputDirectory)')"/>
+		<MakeDir Directories="$(DocOutputDirectory)" Condition = "!Exists('$(DocOutputDirectory)')"/>
+		<MakeDir Directories="$(TestOutputDirectory)" Condition = "!Exists('$(TestOutputDirectory)')"/>
+		<MakeDir Directories="$(ObjBinOutputDirectory)" Condition = "!Exists('$(ObjBinOutputDirectory)')"/>
+		<MakeDir Directories="$(ObjTestOutputDirectory)" Condition = "!Exists('$(ObjTestOutputDirectory)')"/>
+	</Target>
+
+	<!--
+    ============================================================
+									CreateVersionInfo
+
+    The create version info entry point.
+    ============================================================
+    -->
+	<Target Name="CreateVersionInfo">
+		<Message Text="CreateVersionInfo Target" Importance="high" />
+		<Message Text="AssemblyVersion = $(BuildVersion)" />
+		<Message Text="AssemblyFileVersion = $(FileVersion)" />
+		<PropertyGroup>
+			<BuildInfoFileContent>
+// automatically generated
+[assembly: System.Reflection.AssemblyVersion("$(BuildVersion)")]
+[assembly: System.Reflection.AssemblyFileVersion("$(FileVersion)")]
+[assembly: System.Reflection.AssemblyProduct("$(BuildProductName)")]
+			</BuildInfoFileContent>
+		</PropertyGroup>
+
+		<ReadLinesFromFile File="$(BuildInfoFile)" Condition="Exists('$(BuildInfoFile)')">
+			<Output TaskParameter="Lines" ItemName="CurrentBuildInfoFileContent" />
+		</ReadLinesFromFile>
+
+		<WriteLinesToFile File="$(BuildInfoFile)"
+				  Lines='$(BuildInfoFileContent)'
+				  Overwrite="true"
+				  Condition="'$(BuildInfoFileContent)' != '@(CurrentBuildInfoFileContent)' " />
+	</Target>
+
+	<!--
+    ============================================================
+									CoreBuild
+
+    The core build entry point.
+    ============================================================
+    -->
+	<Target Name="CoreBuild">
+		<Message Text="CoreBuild Target" Importance="high" />
+		<!-- Task Batching MSBuild-Task: Projects="...%(TargetFramework.ProjectFileSuffix)..." -->
+		<MSBuild Projects="$(SolutionDirectory)CoreMin\$(AssemblyName)%(TargetFramework.ProjectFileSuffix).csproj"
+					Targets="Build"
+					Properties="TargetFrameworkFolderName=%(TargetFramework.FolderName);BaseOutputDirectory=$(BaseOutputDirectory);BuildInfoFile=$(BuildInfoFile);DefineConstants=BuildScript"
+					ToolsVersion="%(TargetFramework.ToolsVersion)"
+					ContinueOnError="$(IgnoreBuildFailures)"
+					StopOnFirstFailure="false" />
+	</Target>
+
+	<!--
+    ============================================================
+									BuildTests
+
+    The build unittests entry point.
+    ============================================================
+    -->
+	<Target Name="BuildTests">
+		<Message Text="BuildTests Target" Importance="high" />
+		<!-- Task Batching MSBuild-Task: Projects="...%(TargetFramework.ProjectFileSuffix)..." -->
+		<MSBuild Projects="$(TestProjectBaseDirectory)\CoreMin.Test\$(AssemblyName).Test%(TargetFramework.ProjectFileSuffix).csproj"
+					 Targets="Build"
+					 Properties="TargetFrameworkVersion=%(TargetFramework.TargetFrameworkVersion);TargetFrameworkFolderName=%(TargetFramework.FolderName);BaseOutputDirectory=$(BaseOutputDirectory)"
+					 ContinueOnError="$(IgnoreBuildFailures)"
+					 StopOnFirstFailure="false" />
+	</Target>
+
+	<!--
+    ============================================================
+									RunTests
+
+    The run unittests entry point.
+    ============================================================
+    -->
+	<Target Name="RunTests">
+		<Message Text="RunTests Target" Importance="high" />
+		<CallTarget Targets="NetFx40Test" Condition="'$(BuildNetFX40)'=='true'"/>
+		<CallTarget Targets="NetFx48Test" Condition="'$(BuildNetFX48)'=='true'"/>
+	</Target>
+
+	<Target Name="NetFx40Test">
+		<Message Text="NetFx40Test Target" Importance="high" />
+		<Exec Command='"$(XUnit191Clr4)" $(AssemblyName).Test.dll /xml TestResults_$(BuildTimeStamp).xml /html TestResults_$(BuildTimeStamp).html'
+				WorkingDirectory="$(TestOutputDirectory)\$(Configuration)\net40"
+				Condition="Exists('$(XUnit191Clr4)')" IgnoreExitCode="true" />
+	</Target>
+
+	<Target Name="NetFx48Test">
+		<Message Text="NetFx48Test Target" Importance="high" />
+		<Exec Command='"$(XUnit191Clr4)" $(AssemblyName).Test.dll /xml TestResults_$(BuildTimeStamp).xml /html TestResults_$(BuildTimeStamp).html'
+				WorkingDirectory="$(TestOutputDirectory)\$(Configuration)\net48"
+				Condition="Exists('$(XUnit191Clr4)')" />
+	</Target>
+
+	<!--
+    ============================================================
+									Archive
+
+    The archive assemblies entry point.
+    ============================================================
+    -->
+	<Target Name="Archive" DependsOnTargets="BeforeArchive">
+		<Message Text="Archive Target" Importance="high" />
+		<Exec Command='"$(InfoZip)" "$(ArchiveOutputPath)\$(AssemblyName)%(TargetFramework.ProjectFileSuffix)$(ConfigurationSuffix).zip" $(AssemblyName).* -x *Test*'
+				WorkingDirectory="$(BinOutputDirectory)\$(Configuration)\%(TargetFramework.FolderName)" />
+	</Target>
+
+	<Target Name="BeforeArchive">
+		<MakeDir Directories="$(ArchiveOutputPath)" />
+	</Target>
+
+	<!--
+    ============================================================
+									DeepClean & Clean
+
+    The deep clean and clean entry points.
+    ============================================================
+    -->
+	<ItemGroup>
+		<FilesToCleanup Include="..\**\*.suo" />
+		<FilesToCleanup Include="..\**\*.ncb" />
+		<FilesToCleanup Include="..\**\*.user" />
+		<FilesToCleanup Include="..\**\*.cache" />
+	</ItemGroup>
+
+	<Target Name="Clean">
+		<Message Text="Clean Target" Importance="high" />
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(BinOutputDirectory)"/>
+		<!-- <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(DocOutputDirectory)"/> -->
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(TestOutputDirectory)"/>
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(ObjBinOutputDirectory)"/>
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(ObjTestOutputDirectory)"/>
+		<!-- <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\build\doc\**\working"/> -->
+	</Target>
+
+	<Target Name="DeepClean">
+		<Message Text="DeepClean Target" Importance="high" />
+		<Delete Files="@(FilesToCleanup)" />
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(BinOutputDirectory)"/>
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(DocOutputDirectory)"/>
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(TestOutputDirectory)"/>
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(ObjBinOutputDirectory)"/>
+		<MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(ObjTestOutputDirectory)"/>
+	</Target>
+
+</Project>

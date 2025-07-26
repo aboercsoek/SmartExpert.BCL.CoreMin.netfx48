@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BaseOutputDirectory Condition=" '$(BaseOutputDirectory)' == '' ">$([MSBuild]::Escape($([System.IO.Path]::GetFullPath(`$([System.IO.Path]::Combine(`$(MSBuildProjectDirectory)`, `..\..\build\`))`))))</BaseOutputDirectory>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6292CC43-50EF-422B-AC98-3DD16B667B3C}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <RootNamespace>SmartExpert.Test</RootNamespace>
+    <AssemblyName>SmartExpert.BCL.CoreMin.Test</AssemblyName>
+    <AssemblyOriginatorKeyFile>..\smartexpert.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <BaseAddress>285212672</BaseAddress>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <NoWarn>1591</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <BaseAddress>285212672</BaseAddress>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.8</TargetFrameworkVersion>
+  	<TargetFrameworkFolderName Condition=" '$(TargetFrameworkFolderName)' == '' ">net48</TargetFrameworkFolderName>
+    <TargetFrameworkName Condition=" '$(TargetFrameworkName)' == '' ">.NET Framework 4.8</TargetFrameworkName>
+    <DefineConstants>NET4_8;$(DefineConstants)</DefineConstants>
+    <OutputPath>$(BaseOutputDirectory)test\$(Configuration)\$(TargetFrameworkFolderName)</OutputPath>
+    <IntermediateOutputPath>$(BaseOutputDirectory)obj\t\$(Configuration)\$(TargetFrameworkFolderName)</IntermediateOutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+	<RefTestDirectory>$([MSBuild]::Escape($([System.IO.Path]::GetFullPath(`$([System.IO.Path]::Combine(`$(MSBuildProjectDirectory)`, `.\ref\test`))`))))</RefTestDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="xunit">
+      <HintPath>$(RefTestDirectory)\xUnit.1.9.1\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>$(RefTestDirectory)\xUnit.1.9.1\xunit.extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpTestsEx">
+      <HintPath>$(RefTestDirectory)\SharpTestEx.1.1.1\xUnit191Version\SharpTestsEx.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>$(RefTestDirectory)\FluentAssertions.2.0.1\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>$(RefTestDirectory)\Moq.4.0.10827\net40\Moq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\PropertyBagTests.cs" />
+    <Compile Include="Core\ObjectExTests.cs" />
+    <Compile Include="DataTypes\Enums\EnumExTests.cs" />
+    <Compile Include="Diagnostics\Console2StringTests.cs" />
+    <Compile Include="Messaging\BoolMessageDataTests.cs" />
+    <Compile Include="Messaging\ExecuteHelperTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\TestClass.cs" />
+    <Compile Include="Repository\TestEnumNoFlags.cs" />
+    <Compile Include="Repository\TestEnumWithFlags.cs" />
+    <Compile Include="Repository\TestStruct.cs" />
+    <Compile Include="Text\StringExTests.cs" />
+    <None Include="TypeNameTestsTemplate.cs" />
+    <Compile Include="Validation\ArgCheckerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SmartExpert.BCL.CoreMin.Test.xunit">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreMin\SmartExpert.BCL.CoreMin.netfx48.csproj">
+      <Project>{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}</Project>
+      <Name>SmartExpert.BCL.CoreMin.netfx48</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

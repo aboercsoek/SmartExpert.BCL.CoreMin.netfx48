@@ -1,0 +1,7 @@
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Administratoren
+SAM Account Name [String] = Administratoren
+SID [SecurityIdentifier] = S-1-5-32-544
+
+----------------------------------------

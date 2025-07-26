@@ -1,0 +1,91 @@
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Administratoren
+SAM Account Name [String] = Administratoren
+SID [SecurityIdentifier] = S-1-5-32-544
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Benutzer
+SAM Account Name [String] = Benutzer
+SID [SecurityIdentifier] = S-1-5-32-545
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Distributed COM-Benutzer
+SAM Account Name [String] = Distributed COM-Benutzer
+SID [SecurityIdentifier] = S-1-5-32-562
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Ereignisprotokollleser
+SAM Account Name [String] = Ereignisprotokollleser
+SID [SecurityIdentifier] = S-1-5-32-573
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Gäste
+SAM Account Name [String] = Gäste
+SID [SecurityIdentifier] = S-1-5-32-546
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = IIS_IUSRS
+SAM Account Name [String] = IIS_IUSRS
+SID [SecurityIdentifier] = S-1-5-32-568
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Leistungsprotokollbenutzer
+SAM Account Name [String] = Leistungsprotokollbenutzer
+SID [SecurityIdentifier] = S-1-5-32-559
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = Leistungsüberwachungsbenutzer
+SAM Account Name [String] = Leistungsüberwachungsbenutzer
+SID [SecurityIdentifier] = S-1-5-32-558
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = HelpLibraryUpdaters
+SAM Account Name [String] = HelpLibraryUpdaters
+SID [SecurityIdentifier] = S-1-5-21-49524048-2079951455-3270330015-1006
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = HomeUsers
+SAM Account Name [String] = HomeUsers
+SID [SecurityIdentifier] = S-1-5-21-49524048-2079951455-3270330015-1000
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = SQLServer2005SQLBrowserUser$ABD830
+SAM Account Name [String] = SQLServer2005SQLBrowserUser$ABD830
+SID [SecurityIdentifier] = S-1-5-21-49524048-2079951455-3270330015-1007
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = TFS_APPTIER_SERVICE_WPG
+SAM Account Name [String] = TFS_APPTIER_SERVICE_WPG
+SID [SecurityIdentifier] = S-1-5-21-49524048-2079951455-3270330015-1008
+
+----------------------------------------
+ConnectedServer [String] = ABD830
+Context Type [ContextType] = Machine
+Name [String] = WinRMRemoteWMIUsers__
+SAM Account Name [String] = WinRMRemoteWMIUsers__
+SID [SecurityIdentifier] = S-1-5-21-49524048-2079951455-3270330015-1005
+
+----------------------------------------

@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 SolutionItems", "0 SolutionItems", "{5BD087E6-C731-4204-82D1-BE5DE9CEA4FF}"
+	ProjectSection(SolutionItems) = preProject
+		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+		SmartExpert.BCL.CoreMin.proj = SmartExpert.BCL.CoreMin.proj
+		SmartExpert.Build.tasks = SmartExpert.Build.tasks
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Prj", "1 Prj", "{2B5C69E9-2EA7-4009-98C6-BCE59D9A3DCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Test", "2 Test", "{FD72CEC3-0578-4B32-843D-06B892BFA281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartExpert.BCL.CoreMin.netfx48", "CoreMin\SmartExpert.BCL.CoreMin.netfx48.csproj", "{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartExpert.BCL.CoreMin.Test.netfx48", "test\CoreMin.Test\SmartExpert.BCL.CoreMin.Test.netfx48.csproj", "{6292CC43-50EF-422B-AC98-3DD16B667B3C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E} = {1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Usage", "3 Usage", "{17939F48-D61D-4168-8FCE-2414E6290641}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Evaluation", "4 Evaluation", "{FBA7405B-C344-4902-AE9B-A38A36B71ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartExpert.BCL.CoreMin.Examples.Part1.netfx48", "usage\CoreMin.Examples.Part1\SmartExpert.BCL.CoreMin.Examples.Part1.netfx48.csproj", "{9F07B13B-4A3F-4284-92E3-DC4A93246525}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartExpert.BCL.CoreMin.Eval.Console.netfx48", "eval\CoreMin.Eval.Console\SmartExpert.BCL.CoreMin.Eval.Console.netfx48.csproj", "{8ABF97E7-FED0-48E0-B7E7-E90F3D0C1F5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartExpert.BCL.CoreMin.Eval.Web.netfx48", "eval\CoreMin.Eval.Web\SmartExpert.BCL.CoreMin.Eval.Web.netfx48.csproj", "{09325D71-785C-4C42-8145-B3D058DF911D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6292CC43-50EF-422B-AC98-3DD16B667B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6292CC43-50EF-422B-AC98-3DD16B667B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6292CC43-50EF-422B-AC98-3DD16B667B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6292CC43-50EF-422B-AC98-3DD16B667B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F07B13B-4A3F-4284-92E3-DC4A93246525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F07B13B-4A3F-4284-92E3-DC4A93246525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F07B13B-4A3F-4284-92E3-DC4A93246525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F07B13B-4A3F-4284-92E3-DC4A93246525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ABF97E7-FED0-48E0-B7E7-E90F3D0C1F5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ABF97E7-FED0-48E0-B7E7-E90F3D0C1F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ABF97E7-FED0-48E0-B7E7-E90F3D0C1F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ABF97E7-FED0-48E0-B7E7-E90F3D0C1F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09325D71-785C-4C42-8145-B3D058DF911D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09325D71-785C-4C42-8145-B3D058DF911D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09325D71-785C-4C42-8145-B3D058DF911D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09325D71-785C-4C42-8145-B3D058DF911D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1890CAED-E95A-4D8B-A8A4-CAAFDF77247E} = {2B5C69E9-2EA7-4009-98C6-BCE59D9A3DCC}
+		{6292CC43-50EF-422B-AC98-3DD16B667B3C} = {FD72CEC3-0578-4B32-843D-06B892BFA281}
+		{9F07B13B-4A3F-4284-92E3-DC4A93246525} = {17939F48-D61D-4168-8FCE-2414E6290641}
+		{8ABF97E7-FED0-48E0-B7E7-E90F3D0C1F5A} = {FBA7405B-C344-4902-AE9B-A38A36B71ED0}
+		{09325D71-785C-4C42-8145-B3D058DF911D} = {FBA7405B-C344-4902-AE9B-A38A36B71ED0}
+	EndGlobalSection
+EndGlobal
