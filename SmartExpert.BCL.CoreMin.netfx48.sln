@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 SolutionItems", "0 SolutionItems", "{5BD087E6-C731-4204-82D1-BE5DE9CEA4FF}"
 	ProjectSection(SolutionItems) = preProject
 		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+		README.md = README.md
 		SmartExpert.BCL.CoreMin.proj = SmartExpert.BCL.CoreMin.proj
 		SmartExpert.Build.tasks = SmartExpert.Build.tasks
 	EndProjectSection
